@@ -29,46 +29,50 @@
     <h1>Properties</h1>
     <hr>
     <div class="search-result">
-        @foreach($locations as $location)
-            <div class="main-outer">
-                <div class="inner-1">
-                    <span id="location">{{ $location->property_name }}</span><br>
-                    <span id="property">| {{ $location->location_name }} |</span><br><br>
-                    <span id="available">
-                        @if($location->start_date === null)
-                            Not available
-                        @else
-                            {{ $location->start_date }} - {{ $location->end_date }}
-                        @endif
-                    </span>
+        @if(@count($locations) == 0)
+            <span>Empty result</span>
+        @else
+            @foreach($locations as $location)
+                <div class="main-outer">
+                    <div class="inner-1">
+                        <span id="location">{{ $location->property_name }}</span><br>
+                        <span id="property">| {{ $location->location_name }} |</span><br><br>
+                        <span id="available">
+                            @if($location->start_date === null)
+                                Not available
+                            @else
+                                {{ $location->start_date }} - {{ $location->end_date }}
+                            @endif
+                        </span>
+                    </div>
+                    <div class="inner-2">
+                        <span>
+                            @if($location->near_beach === 1)
+                                <span class="positive">Near the beach</span>
+                            @else
+                                <span class="negative">Far from the beach</span>
+                            @endif
+                        </span><br>
+                        <span>
+                            @if($location->near_beach === 1)
+                                <span class="positive">Accepts pets</span>
+                            @else
+                                <span class="negative">No pets</span>
+                            @endif
+                        </span><br>
+                        <span>
+                            <strong>Sleeps:</strong>
+                            {{ $location->sleeps }}
+                        </span><br>
+                        <span>
+                            <strong>Beds:</strong>
+                            {{ $location->beds }}
+                        </span><br>
+                    </div>
                 </div>
-                <div class="inner-2">
-                    <span>
-                        @if($location->near_beach === 1)
-                            <span class="positive">Near the beach</span>
-                        @else
-                            <span class="negative">Far from the beach</span>
-                        @endif
-                    </span><br>
-                    <span>
-                        @if($location->near_beach === 1)
-                            <span class="positive">Accepts pets</span>
-                        @else
-                            <span class="negative">No pets</span>
-                        @endif
-                    </span><br>
-                    <span>
-                        <strong>Sleeps:</strong>
-                        {{ $location->sleeps }}
-                    </span><br>
-                    <span>
-                        <strong>Beds:</strong>
-                        {{ $location->beds }}
-                    </span><br>
-                </div>
-            </div>
-            <hr>
-        @endforeach
+                <hr>
+            @endforeach
+        @endif
 
         {{ $locations->links() }}
     </div>
