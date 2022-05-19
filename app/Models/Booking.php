@@ -9,3 +9,6 @@ class Booking extends Model
 {
     use HasFactory;
 }
+
+// I used "kitloong/laravel-migrations-generator": "^5.2" to generate migration 
+// from the database, I also seeded
